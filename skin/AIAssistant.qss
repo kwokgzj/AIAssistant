@@ -1,0 +1,90 @@
+QWidget#ChatDialogTitleWidget
+{
+    background: transparent;
+}
+
+QListWidget#ChatlistWidget{
+	background-color: transparent; 
+	color:rgb(51,51,51);
+	outline:0px;
+}
+
+QListWidget#ChatlistWidget::Item{
+	background-color: transparent;
+}
+
+QPushButton#ChatDialogBackBtn
+{
+    background: transparent;
+}
+
+QPushButton#ChatDialogCloseBtn
+{
+    background: transparent;
+    border-image: url(:/res/svg/icon_ai_close.svg);
+}
+
+QWidget#ChatTextEditWidget
+{
+    background: #F7F7F7;
+	border-radius: 8px;
+}
+
+QLineEdit#ChatLineEdit
+{
+	border: null;
+    background: transparent;
+	color: #8C8C8C;
+}
+
+QPushButton#ChatAttachmentBtnBtn
+{
+    background: transparent;
+    border-image: url(:/res/svg/icon_ai_attachment.svg);
+}
+
+ChatSwitchButton#ChatSendBtn[choose = true]
+{
+    background: transparent;
+    border-image: url(:/res/svg/icon_ai_send_normal.svg);
+}
+
+ChatSwitchButton#ChatSendBtn[choose = false]
+{
+    background: transparent;
+    border-image: url(:/res/svg/icon_ai_pause_normal.svg);
+}
+
+ChatSwitchButton#ChatSendBtn:disabled
+{
+    background: transparent;
+    border-image: url(:/res/svg/icon_ai_send_dsable.svg);
+}
+
+QWidget#ChatWebEngineView{
+    background: transparent;
+	border-radius: 8px;
+}
+
+QWidget#ChatResendBtnWidget, #ChatStackedWidget
+{
+    background: transparent;
+}
+
+QPushButton#ChatResendBtn
+{
+	color: #FFFFFF;
+	font-size: 16px;
+	background: #E64545;
+	border-radius: 22px;
+}
+
+QPushButton#ChatResendBtn:hover
+{
+	background: #FF383A;
+}
+
+FramessBorder#FramessBorderLabel
+{
+	background: transparent;
+}

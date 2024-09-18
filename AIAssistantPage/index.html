@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./qwebchannel.js"></script>
+  <script src="./marked.min.js"></script>
+  <script src="./vue2.js"></script>
+  <script src="./vue-i18n.min.js"></script>
+  <script src="./lang.js"></script>
+  <!-- <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+  <script>
+    // VConsole 默认会挂载到 `window.VConsole` 上
+    var vConsole = new window.VConsole();
+  </script> -->
+  <script>
+    /**
+     * 初始化qt
+     */
+    window.addEventListener("load", () => {
+      if (typeof qt != 'undefined') {
+        window.channel = new QWebChannel(qt.webChannelTransport, (
+          channel
+        ) => {
+
+          // 获取Qt注册的对象，Qt中registerObject注册的字符串
+          window.__qt_core = window.core = channel.objects.CoreId
+          // 将函数showText和Qt信号toWeb***()绑定
+          core.toWebBool.connect((msg) => {
+            showText(msg)
+          })
+          core.toWebDouble.connect((msg) => {
+            showText(msg)
+          })
+          core.toWebString.connect((msg) => {
+            showText(msg)
+          })
+          core.toWebJsonArray.connect((msg) => {
+            showText(msg)
+          })
+          core.toWebJsonObject.connect((msg) => {
+            showText(msg)
+          })
+        })
+        // alert('Qt环境')
+      } else {
+        // alert('浏览器环境')
+      }
+    })
+
+    // 禁用右键菜单
+    document.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+    })
+  </script>
+</head>
+
+<body>
+  <div id="chat-container">
+    <div id="chat-messages">
+      <template v-for="message in messageList">
+        <!-- 用户信息框开始 -->
+        <div class="clear flex-right" v-if="message.user === 'user'" :key="message.uuid">
+          <div class="time-remark-wrapper">
+            <span class="time">{{message.time}}</span>
+            <div class="message user-message">
+              {{message.context}}
+            </div>
+          </div>
+        </div>
+        <!-- 用户信息框结束 -->
+
+        <!-- 机器人信息框开始 -->
+        <div class="clear flex-left" v-if="message.user === 'assistant'" :key="message.uuid">
+          <div class="time-remark-wrapper">
+            <span class="time">{{message.time}}</span>
+            <div class="message bot-message" :data-uuid="message.uuid"
+              :class="{outputing:!message.done, blink:!message.done}"
+              @click.stop="handleBotMessageClick($event,message)" v-html="message.html">
+
+            </div>
+          </div>
+        </div>
+        <!-- 机器人信息框结束 -->
+      </template>
+      <!-- 清空对话内容 -->
+      <div class="clear-btn" v-show="messageList.length" @click="clearMessageContext">
+        {{ $t('clear_message')}}
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="bottom"></div>
+  <script src="./main.js"></script>
+</body>
+
+</html>

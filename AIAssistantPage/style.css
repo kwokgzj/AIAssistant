@@ -1,0 +1,143 @@
+@font-face {
+    font-family: 'HarmonyOS Sans';
+    src: url("../res/font/HarmonyOS_Sans_SC_Regular.ttf") format("truetype");
+}
+/* @font-face {
+    font-family: 'Source Han Sans CN';
+    src: url("../sucai/SourceHanSansCN-Regular.otf") format("opentype");
+} */
+
+* {
+    font-family: 'HarmonyOS Sans', 'Source Han Sans CN', sans-serif;
+}
+
+body {
+    font-family: 'HarmonyOS Sans', 'Source Han Sans CN', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: block; /* 回退方案，替代flex布局 */
+    text-align: center; /* 回退方案，替代align-items: center */
+}
+
+.time-remark-wrapper {
+    display: block; /* 回退方案，替代flex布局 */
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.mr10 {
+    margin-right: 10px;
+}
+
+.clear{
+    clear: both;
+}
+
+.time {
+    display: block;
+    color: rgba(180, 187, 196, 1);
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+#chat-messages {
+    width: 100%;
+    padding: 16px;
+    padding-bottom: 0;
+    box-sizing: border-box;
+    display: block; /* 回退方案，替代flex布局 */
+}
+
+#chat-container {
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-sizing: content-box;
+    position: relative;
+    overflow-y: auto; /* 恢复scroll的回退方案 */
+}
+
+.flex-right .time-remark-wrapper {
+    float: right;
+    text-align: right; /* 回退方案 */
+}
+
+.message {
+    word-break: break-all;
+    border-radius: 8px;
+    text-align: justify;
+    box-sizing: border-box;
+    padding: 16px 16px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+.user-message {
+    color: rgb(255, 255, 255);
+    background-color: rgb(240, 120, 120);
+}
+
+.flex-right {
+    display: block; /* 回退方案，替代flex布局 */
+    text-align: right;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.flex-left {
+    display: block; /* 回退方案，替代flex布局 */
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.bot-message {
+    background-color: rgb(247, 247, 247);
+}
+
+.outputing::after{
+    content: "●";
+    font-size: 15px;
+    display: inline;
+}
+
+.blink.outputing::after{
+    content: "●";
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.bot-message>p {
+    margin: 0;
+    padding: 0;
+}
+
+.hljs {
+    background: #fff;
+    border-radius: 8px;
+}
+
+
+.clear-btn{
+    cursor: pointer;
+    color: rgb(240, 120, 120);
+    font-size: 14px;
+    padding-bottom: 20px;
+    text-align: center;
+}

@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/svg/icon_ai_attachment.svg</file>
+        <file>res/svg/icon_ai_back.svg</file>
+        <file>res/svg/icon_ai_collapse.svg</file>
+        <file>res/svg/icon_ai_pause_normal.svg</file>
+        <file>res/svg/icon_ai_send_dsable.svg</file>
+        <file>res/svg/icon_ai_send_normal.svg</file>
+        <file>res/svg/icon_ai_close.svg</file>
+        <file>skin/AIAssistant.qss</file>
+    </qresource>
+</RCC>

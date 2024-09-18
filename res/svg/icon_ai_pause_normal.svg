@@ -1,0 +1,16 @@
+<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="icon_ai_pause_normal">
+<circle id="Ellipse 122" cx="10" cy="10.5" r="9.25" stroke="url(#paint0_linear_4588_22629)" stroke-width="1.5"/>
+<rect id="Rectangle 410" x="6" y="6.5" width="8" height="8" rx="2" fill="url(#paint1_linear_4588_22629)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_4588_22629" x1="0.227384" y1="0.215613" x2="23.3954" y2="16.3951" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FF7373"/>
+<stop offset="1" stop-color="#E64545"/>
+</linearGradient>
+<linearGradient id="paint1_linear_4588_22629" x1="6.09095" y1="6.38625" x2="15.3582" y2="12.858" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FF7373"/>
+<stop offset="1" stop-color="#E64545"/>
+</linearGradient>
+</defs>
+</svg>
