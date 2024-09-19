@@ -1,0 +1,12 @@
+prefix=C:/Path/to/install
+exec_prefix=C:/Path/to/install
+libdir=C:/Path/to/install/lib
+includedir=C:/Path/to/install/include
+
+Name: Protocol Buffers
+Description: Google's Data Interchange Format
+Version: 29.0.0
+Requires: abseil_dll utf8_range
+Libs: -L${libdir} -lprotobuf 
+Cflags: -I${includedir} -DPROTOBUF_USE_DLLS
+Conflicts: protobuf-lite
