@@ -1,7 +1,37 @@
 package AIAssistant;
-message pipeMsg
+message init
 {
-   required int32     id = 1;  // ID
-   required string    str = 2;  // str
-   optional int32     opt = 3;  //optional field
+    required string     softwareName = 1;       // 软件名称，区分不同软件
+    required string     softwareVersion = 2;    // 软件版本
+    required string     robotID = 3;            // 指定机器人ID
+    required string     robotSecretKey = 4;     // 机器人密钥
+    required string     systemVersion = 5;      // 操作系统及版本号
+    required int32      softWareXPos = 6;       // 宿主程序x坐标
+    required int32      softWareYPos = 7;       // 宿主程序Y坐标
+    required int32      softWareWidth = 8;      // 宿主程序窗口宽度
+    required int32      softWareHeight = 9;     // 宿主程序窗口高度
+}
+message initResponse
+{
+    required bool       success = 1;            // 是否成功
+    required string     responseMsg = 2;        // 详细信息
+}
+message userContext
+{
+    map<string, string> context = 1;      // 用户上下文
+}
+message command
+{
+    required string command = 1;
+    map<string, string> params = 2;
+}
+message commandResponse
+{
+    required bool       success = 1;            // 是否成功
+    required string     responseMsg = 2;        // 详细信息
+}
+message statusRepost
+{
+    required int32      status = 1;             // 状态码
+    required string     responseMsg = 2;        // 详细信息
 }

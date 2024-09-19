@@ -10,6 +10,10 @@
 #include <QStackedWidget>
 #include <QJsonObject>
 #include <QJsonArray>
+#ifdef WIN32
+#include <Windows.h>
+#else
+#endif
 #include "chat/ChatBaseManger.h"
 #include "base/ChatWidgetTitleBar.h"
 #include "base/ChatSwitchButton.h"
@@ -129,6 +133,7 @@ public:
     ~ChatDialog();
     void init();
     void helloMessage();
+    void setPipeName(QString name);
 protected:
     void resizeEvent(QResizeEvent *event) override;
     virtual void paintEvent(QPaintEvent* event) override;
@@ -162,6 +167,11 @@ private:
     QPushButton* m_resendBtn{ nullptr };
     QStackedWidget* m_stackedWidget{ nullptr };
     BorderContainer* m_borderContainer{ nullptr };
+    QString m_pipeName;
+    #ifdef WIN32
+    HANDLE m_hPipe;
+    #else
+    #endif
 };
 
 #endif // CHATDIALOG_H

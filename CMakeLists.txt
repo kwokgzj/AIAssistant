@@ -7,6 +7,28 @@ find_package(Qt5 COMPONENTS Widgets Network Concurrent WebEngineWidgets)
 
 # find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
+list(APPEND CMAKE_PREFIX_PATH ${CMAKE_SOURCE_DIR}/protobuf/lib/cmake/protobuf;${CMAKE_SOURCE_DIR}/protobuf/lib/cmake/absl;${CMAKE_SOURCE_DIR}/protobuf/lib/cmake/utf8_range)
+message("CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
+# Find required protobuf package
+find_package(protobuf CONFIG REQUIRED)
+
+if(protobuf_VERBOSE)
+  message(STATUS "Using Protocol Buffers ${protobuf_VERSION}")
+endif()
+
+set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
+
+# http://www.cmake.org/Wiki/CMake_FAQ#How_can_I_build_my_MSVC_application_with_a_static_runtime.3F
+if(MSVC AND protobuf_MSVC_STATIC_RUNTIME)
+  foreach(flag_var
+      CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
+      CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO)
+    if(${flag_var} MATCHES "/MD")
+      string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
+    endif(${flag_var} MATCHES "/MD")
+  endforeach()
+endif()
+
 configure_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/version.rc.in
 	${CMAKE_CURRENT_SOURCE_DIR}/version.rc
@@ -30,43 +52,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")# .exe and .dll
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")# .so and .dylib
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")# .lib and .a
 
-#第三方库头文件路
-include_directories(
-	"${CMAKE_SOURCE_DIR}/protobuf/include"	
-)
 
-#设置链接的动态库文件目录
-if(APPLE)
-    link_directories(
-        "${CMAKE_SOURCE_DIR}/protobuf/lib/windows" 
-    )
-elseif(WIN32 OR MINGW)
-    link_directories(
-        "${CMAKE_SOURCE_DIR}/protobuf/lib" 
-    )
-endif()
 
-# if(APPLE)
-#     set(CMAKE_EXE_LINKER_FLAGS "-framework Cocoa -framework CoreBluetooth -framework Foundation")
-#     target_link_libraries(${TARGET_NAME} PRIVATE 
-#         # optimized simpleble
-#         # aeSharpnessFineAlgorithm
-#         protobuf
-#         # optimized ossLib
-#         # omp
-#         # z
-#     )    
-# elseif(WIN32 OR MINGW)
-#     target_link_libraries(${TARGET_NAME} PRIVATE 
-#         # debug simplebled
-#         # optimized simpleble 
-#         # debug 3DCamerad
-#         debug protobuf
-#         # debug ossLibd
-#         # optimized ossLib
-#         # aeSharpnessFineAlgorithm
-#     )
-# endif()
 
 if(WIN32 OR MINGW)
     add_executable(${TARGET_NAME} WIN32
@@ -83,30 +70,7 @@ target_link_libraries(AIAssistant PUBLIC
     Qt5::Network
     Qt5::Concurrent
     Qt5::WebEngineWidgets
-    abseil_dll
-    abseil_test_dll
-    absl_flags_commandlineflag
-    absl_flags_commandlineflag_internal
-    absl_flags_config
-    absl_flags_internal
-    absl_flags_marshalling
-    absl_flags_parse
-    absl_flags_private_handle_accessor
-    absl_flags_program_name
-    absl_flags_reflection
-    absl_flags_usage
-    absl_flags_usage_internal
-    absl_log_flags
-    absl_log_internal_fnmatch
-    absl_string_view
-    absl_vlog_config_internal
-    gmock
-    libprotobuf-lited
-    libprotobufd
-    libprotocd
-    libupbd
-    utf8_range
-    utf8_validity
+    protobuf::libprotobuf
 )
 
 if(COPY_LIB)

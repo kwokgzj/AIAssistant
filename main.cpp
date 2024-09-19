@@ -10,7 +10,7 @@
 #include "lang/LanguageMgr.h"
 #include "utils/RevoScanConfig.h"
 // #include "../ui/lang/language.h"
-// #include "utils/AIAssistant.pipeMsg.pb.h"
+#include "utils/AIAssistant.pipeMsg.pb.h"
 
 // #include "lang/LanguageMgr.h"
 // #include "utils/RevoScanConfig.h"
@@ -82,10 +82,8 @@ int main(int argc, char *argv[])
     QFontDatabase::addApplicationFont(fontfilePath + "SourceHanSansCN-Regular.ttf");
     QFontDatabase::addApplicationFont(fontfilePath + "HarmonyOS_Sans_Regular.ttf");
     ChatDialog w;
+    w.setPipeName("revoscan");
     w.setWindowFlag(Qt::Window);
     w.show();
     return a.exec();
-    // AIAssistant::pipeMsg msg;
-    // msg.set_id(101);
-    // msg.set_str("hello");
 }
