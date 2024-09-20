@@ -22,7 +22,7 @@ message userContext
 }
 message command
 {
-    required string command = 1;
+    required string commandMsg = 1;
     map<string, string> params = 2;
 }
 message commandResponse

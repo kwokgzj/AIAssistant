@@ -10,14 +10,12 @@
 #include <QStackedWidget>
 #include <QJsonObject>
 #include <QJsonArray>
-#ifdef WIN32
-#include <Windows.h>
-#else
-#endif
 #include "chat/ChatBaseManger.h"
 #include "base/ChatWidgetTitleBar.h"
 #include "base/ChatSwitchButton.h"
 #include "base/BorderContainer.h"
+#include "pipe/PipeManager.h"
+
 /**
  * @brief  Qt和Web端交互的中介单例类
  */
@@ -168,10 +166,7 @@ private:
     QStackedWidget* m_stackedWidget{ nullptr };
     BorderContainer* m_borderContainer{ nullptr };
     QString m_pipeName;
-    #ifdef WIN32
-    HANDLE m_hPipe;
-    #else
-    #endif
+    PipeManager* m_pipeManager;
 };
 
 #endif // CHATDIALOG_H

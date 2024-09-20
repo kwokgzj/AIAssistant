@@ -1519,7 +1519,7 @@ class command final
   // accessors -------------------------------------------------------
   enum : int {
     kParamsFieldNumber = 2,
-    kCommandFieldNumber = 1,
+    kCommandMsgFieldNumber = 1,
   };
   // map<string, string> params = 2;
   int params_size() const;
@@ -1536,21 +1536,21 @@ class command final
   ::google::protobuf::Map<std::string, std::string>* _internal_mutable_params();
 
   public:
-  // required string command = 1;
-  bool has_command() const;
-  void clear_command() ;
-  const std::string& command() const;
+  // required string commandMsg = 1;
+  bool has_commandmsg() const;
+  void clear_commandmsg() ;
+  const std::string& commandmsg() const;
   template <typename Arg_ = const std::string&, typename... Args_>
-  void set_command(Arg_&& arg, Args_... args);
-  std::string* mutable_command();
-  PROTOBUF_NODISCARD std::string* release_command();
-  void set_allocated_command(std::string* value);
+  void set_commandmsg(Arg_&& arg, Args_... args);
+  std::string* mutable_commandmsg();
+  PROTOBUF_NODISCARD std::string* release_commandmsg();
+  void set_allocated_commandmsg(std::string* value);
 
   private:
-  const std::string& _internal_command() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_command(
+  const std::string& _internal_commandmsg() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_commandmsg(
       const std::string& value);
-  std::string* _internal_mutable_command();
+  std::string* _internal_mutable_commandmsg();
 
   public:
   // @@protoc_insertion_point(class_scope:AIAssistant.command)
@@ -1559,7 +1559,7 @@ class command final
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
       0, 2, 1,
-      41, 2>
+      44, 2>
       _table_;
 
   static constexpr const void* _raw_default_instance_ =
@@ -1585,7 +1585,7 @@ class command final
                       ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
                       ::google::protobuf::internal::WireFormatLite::TYPE_STRING>
         params_;
-    ::google::protobuf::internal::ArenaStringPtr command_;
+    ::google::protobuf::internal::ArenaStringPtr commandmsg_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -2206,73 +2206,73 @@ inline ::google::protobuf::Map<std::string, std::string>* userContext::mutable_c
 
 // command
 
-// required string command = 1;
-inline bool command::has_command() const {
+// required string commandMsg = 1;
+inline bool command::has_commandmsg() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
-inline void command::clear_command() {
+inline void command::clear_commandmsg() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.command_.ClearToEmpty();
+  _impl_.commandmsg_.ClearToEmpty();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline const std::string& command::command() const
+inline const std::string& command::commandmsg() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:AIAssistant.command.command)
-  return _internal_command();
+  // @@protoc_insertion_point(field_get:AIAssistant.command.commandMsg)
+  return _internal_commandmsg();
 }
 template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void command::set_command(Arg_&& arg,
+inline PROTOBUF_ALWAYS_INLINE void command::set_commandmsg(Arg_&& arg,
                                                      Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.command_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:AIAssistant.command.command)
+  _impl_.commandmsg_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:AIAssistant.command.commandMsg)
 }
-inline std::string* command::mutable_command() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_command();
-  // @@protoc_insertion_point(field_mutable:AIAssistant.command.command)
+inline std::string* command::mutable_commandmsg() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_commandmsg();
+  // @@protoc_insertion_point(field_mutable:AIAssistant.command.commandMsg)
   return _s;
 }
-inline const std::string& command::_internal_command() const {
+inline const std::string& command::_internal_commandmsg() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.command_.Get();
+  return _impl_.commandmsg_.Get();
 }
-inline void command::_internal_set_command(const std::string& value) {
+inline void command::_internal_set_commandmsg(const std::string& value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.command_.Set(value, GetArena());
+  _impl_.commandmsg_.Set(value, GetArena());
 }
-inline std::string* command::_internal_mutable_command() {
+inline std::string* command::_internal_mutable_commandmsg() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
-  return _impl_.command_.Mutable( GetArena());
+  return _impl_.commandmsg_.Mutable( GetArena());
 }
-inline std::string* command::release_command() {
+inline std::string* command::release_commandmsg() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:AIAssistant.command.command)
+  // @@protoc_insertion_point(field_release:AIAssistant.command.commandMsg)
   if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
     return nullptr;
   }
   _impl_._has_bits_[0] &= ~0x00000001u;
-  auto* released = _impl_.command_.Release();
+  auto* released = _impl_.commandmsg_.Release();
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
-    _impl_.command_.Set("", GetArena());
+    _impl_.commandmsg_.Set("", GetArena());
   }
   return released;
 }
-inline void command::set_allocated_command(std::string* value) {
+inline void command::set_allocated_commandmsg(std::string* value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (value != nullptr) {
     _impl_._has_bits_[0] |= 0x00000001u;
   } else {
     _impl_._has_bits_[0] &= ~0x00000001u;
   }
-  _impl_.command_.SetAllocated(value, GetArena());
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.command_.IsDefault()) {
-    _impl_.command_.Set("", GetArena());
+  _impl_.commandmsg_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.commandmsg_.IsDefault()) {
+    _impl_.commandmsg_.Set("", GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:AIAssistant.command.command)
+  // @@protoc_insertion_point(field_set_allocated:AIAssistant.command.commandMsg)
 }
 
 // map<string, string> params = 2;

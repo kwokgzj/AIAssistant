@@ -3,7 +3,7 @@
 // source: utils/AIAssistant.pipeMsg.proto
 // Protobuf C++ Version: 5.29.0-dev
 
-#include "utils/AIAssistant.pipeMsg.pb.h"
+#include "AIAssistant.pipeMsg.pb.h"
 
 #include <algorithm>
 #include <type_traits>
@@ -218,7 +218,7 @@ inline constexpr command::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
         params_{},
-        command_(
+        commandmsg_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()) {}
 
@@ -328,7 +328,7 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::AIAssistant::command, _impl_.command_),
+        PROTOBUF_FIELD_OFFSET(::AIAssistant::command, _impl_.commandmsg_),
         PROTOBUF_FIELD_OFFSET(::AIAssistant::command, _impl_.params_),
         0,
         ~0u,
@@ -391,19 +391,19 @@ const char descriptor_table_protodef_utils_2fAIAssistant_2epipeMsg_2eproto[] ABS
     "cess\030\001 \002(\010\022\023\n\013responseMsg\030\002 \002(\t\"u\n\013userC"
     "ontext\0226\n\007context\030\001 \003(\0132%.AIAssistant.us"
     "erContext.ContextEntry\032.\n\014ContextEntry\022\013"
-    "\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"{\n\007comman"
-    "d\022\017\n\007command\030\001 \002(\t\0220\n\006params\030\002 \003(\0132 .AIA"
-    "ssistant.command.ParamsEntry\032-\n\013ParamsEn"
-    "try\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"7\n\017c"
-    "ommandResponse\022\017\n\007success\030\001 \002(\010\022\023\n\013respo"
-    "nseMsg\030\002 \002(\t\"3\n\014statusRepost\022\016\n\006status\030\001"
-    " \002(\005\022\023\n\013responseMsg\030\002 \002(\t"
+    "\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"~\n\007comman"
+    "d\022\022\n\ncommandMsg\030\001 \002(\t\0220\n\006params\030\002 \003(\0132 ."
+    "AIAssistant.command.ParamsEntry\032-\n\013Param"
+    "sEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"7"
+    "\n\017commandResponse\022\017\n\007success\030\001 \002(\010\022\023\n\013re"
+    "sponseMsg\030\002 \002(\t\"3\n\014statusRepost\022\016\n\006statu"
+    "s\030\001 \002(\005\022\023\n\013responseMsg\030\002 \002(\t"
 };
 static ::absl::once_flag descriptor_table_utils_2fAIAssistant_2epipeMsg_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_utils_2fAIAssistant_2epipeMsg_2eproto = {
     false,
     false,
-    665,
+    668,
     descriptor_table_protodef_utils_2fAIAssistant_2epipeMsg_2eproto,
     "utils/AIAssistant.pipeMsg.proto",
     &descriptor_table_utils_2fAIAssistant_2epipeMsg_2eproto_once,
@@ -1682,7 +1682,7 @@ inline PROTOBUF_NDEBUG_INLINE command::Impl_::Impl_(
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
         params_{visibility, arena, from.params_},
-        command_(arena, from.command_) {}
+        commandmsg_(arena, from.commandmsg_) {}
 
 command::command(
     ::google::protobuf::Arena* arena,
@@ -1705,7 +1705,7 @@ inline PROTOBUF_NDEBUG_INLINE command::Impl_::Impl_(
     ::google::protobuf::Arena* arena)
       : _cached_size_{0},
         params_{visibility, arena},
-        command_(arena) {}
+        commandmsg_(arena) {}
 
 inline void command::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
@@ -1718,7 +1718,7 @@ inline void command::SharedDtor(MessageLite& self) {
   command& this_ = static_cast<command&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.command_.Destroy();
+  this_._impl_.commandmsg_.Destroy();
   this_._impl_.~Impl_();
 }
 
@@ -1773,7 +1773,7 @@ const ::google::protobuf::MessageLite::ClassData* command::GetClassData() const 
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 2, 1, 41, 2> command::_table_ = {
+const ::_pbi::TcParseTable<0, 2, 1, 44, 2> command::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(command, _impl_._has_bits_),
     0, // no _extensions_
@@ -1791,14 +1791,14 @@ const ::_pbi::TcParseTable<0, 2, 1, 41, 2> command::_table_ = {
     ::_pbi::TcParser::GetTable<::AIAssistant::command>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // required string command = 1;
+    // required string commandMsg = 1;
     {::_pbi::TcParser::FastSS1,
-     {10, 0, 0, PROTOBUF_FIELD_OFFSET(command, _impl_.command_)}},
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(command, _impl_.commandmsg_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // required string command = 1;
-    {PROTOBUF_FIELD_OFFSET(command, _impl_.command_), _Internal::kHasBitsOffset + 0, 0,
+    // required string commandMsg = 1;
+    {PROTOBUF_FIELD_OFFSET(command, _impl_.commandmsg_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kRawString | ::_fl::kRepAString)},
     // map<string, string> params = 2;
     {PROTOBUF_FIELD_OFFSET(command, _impl_.params_), -1, 0,
@@ -1809,9 +1809,9 @@ const ::_pbi::TcParseTable<0, 2, 1, 41, 2> command::_table_ = {
         0, 1, 0, 9,
         9)},
   }}, {{
-    "\23\7\6\0\0\0\0\0"
+    "\23\12\6\0\0\0\0\0"
     "AIAssistant.command"
-    "command"
+    "commandMsg"
     "params"
   }},
 };
@@ -1826,7 +1826,7 @@ PROTOBUF_NOINLINE void command::Clear() {
   _impl_.params_.Clear();
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
-    _impl_.command_.ClearNonDefaultToEmpty();
+    _impl_.commandmsg_.ClearNonDefaultToEmpty();
   }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
@@ -1848,11 +1848,11 @@ PROTOBUF_NOINLINE void command::Clear() {
           (void)cached_has_bits;
 
           cached_has_bits = this_._impl_._has_bits_[0];
-          // required string command = 1;
+          // required string commandMsg = 1;
           if (cached_has_bits & 0x00000001u) {
-            const std::string& _s = this_._internal_command();
+            const std::string& _s = this_._internal_commandmsg();
             ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormat::SERIALIZE,
-                                        "AIAssistant.command.command");
+                                        "AIAssistant.command.commandMsg");
             target = stream->WriteStringMaybeAliased(1, _s, target);
           }
 
@@ -1926,11 +1926,11 @@ PROTOBUF_NOINLINE void command::Clear() {
             }
           }
            {
-            // required string command = 1;
+            // required string commandMsg = 1;
             cached_has_bits = this_._impl_._has_bits_[0];
             if (cached_has_bits & 0x00000001u) {
               total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_command());
+                                              this_._internal_commandmsg());
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -1948,7 +1948,7 @@ void command::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google:
   _this->_impl_.params_.MergeFrom(from._impl_.params_);
   cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
-    _this->_internal_set_command(from._internal_command());
+    _this->_internal_set_commandmsg(from._internal_commandmsg());
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
@@ -1977,7 +1977,7 @@ void command::InternalSwap(command* PROTOBUF_RESTRICT other) {
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   _impl_.params_.InternalSwap(&other->_impl_.params_);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.command_, &other->_impl_.command_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.commandmsg_, &other->_impl_.commandmsg_, arena);
 }
 
 ::google::protobuf::Metadata command::GetMetadata() const {

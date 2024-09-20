@@ -1,8 +1,6 @@
 #ifndef REVOSCANCONFIG_H
 #define REVOSCANCONFIG_H
 
-
-
 #include <QObject>
 #include <QList>
 #include <QMap>

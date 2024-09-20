@@ -14,8 +14,6 @@
 #include <QApplication>
 #include <QDir>
 // #include "../ui/lang/language.h"
-#define BUF_SIZE 4096
-#define EXAMP_PIPE   L"\\\\.\\PIPE\\EB3F2E4B_52E2_40F9_A17D_B4A2588F23AB"
 ChatDialog::ChatDialog(QWidget *parent) :
     QDialog(parent)
 {
@@ -182,53 +180,7 @@ void ChatDialog::init(){
     connect(Core::getInstance(), &Core::clearContext, this, &ChatDialog::slotClearContext);
 
     m_borderContainer = new BorderContainer(this, 386, 356);
-
-    #ifdef WIN32
-    QTimer::singleShot(1000, [&]{
-        m_hPipe = NULL;
-        char  szBuffer[BUF_SIZE] = { 0 };
-        DWORD dwReturn = 0;
-        // 判断是否有可以利用的命名管道  
-        const wchar_t pipeNameW[] = L"\\\\.\\PIPE\\EB3F2E4B_52E2_40F9_A17D_B4A2588F23AB";
-        // 缓冲区大小：将宽字符转换为ANSI字符时，1 wchar_t 大概对应1-2个 char
-        char pipeNameA[256];
-        // 将宽字符转换为ANSI字符
-        WideCharToMultiByte(CP_ACP, 0, pipeNameW, -1, pipeNameA, 256, NULL, NULL);
-        if (!WaitNamedPipe(pipeNameA, NMPWAIT_USE_DEFAULT_WAIT))
-        {
-            std::cout << "zjGuo test No Read Pipe Accessible" << std::endl;
-        }
-        // 打开可用的命名管道 , 并与服务器端进程进行通信  
-        m_hPipe = CreateFile(pipeNameA, GENERIC_READ | GENERIC_WRITE,
-            FILE_SHARE_READ | FILE_SHARE_WRITE,
-            NULL, OPEN_EXISTING, 0, NULL);
-        if (m_hPipe == INVALID_HANDLE_VALUE)
-        {
-            std::cout << "zjGuo test Open Read Pipe Error" << std::endl;
-            return;
-        }
-        std::cout << "zjGuo test Wait for the message" << std::endl;
-        // 读取服务端发来的数据
-        if (ReadFile(m_hPipe, szBuffer, BUF_SIZE, &dwReturn, NULL))
-        {
-            szBuffer[dwReturn] = '\0';
-            std::cout << "zjGuo test Read --- " << szBuffer << std::endl;
-        }
-        else
-        {
-            std::cout << "zjGuo test resiver Read Failed" << std::endl;
-        }
-        // 向服务端发送数据
-        memset(szBuffer, 0, BUF_SIZE);
-        // cin >> szBuffer;
-        if (!WriteFile(m_hPipe, "resiver", strlen("resiver"), &dwReturn, NULL))
-        {
-            std::cout << "zjGuo test Write Failed" << std::endl;
-        }
-        // CloseHandle(hPipe);
-    });
-    #else
-    #endif
+    m_pipeManager = new PipeManager("revoscan");
 }
 
 void ChatDialog::slotSendBtnClicked()
@@ -252,14 +204,6 @@ void ChatDialog::slotSendBtnClicked()
         waitingReplyMessage();
         m_isGeneratingMsg = true;
         changeSendBtn();
-        #ifdef WIN32
-        DWORD dwReturn = 0;
-        if (!WriteFile(m_hPipe, msg.toUtf8().constData(), strlen(msg.toUtf8().constData()), &dwReturn, NULL))
-        {
-            std::cout << "zjGuo test Write Failed" << std::endl;
-        }
-        #else
-        #endif
     }else if(m_isGeneratingMsg && !m_sendBtn->choose()){
         QJsonObject obj;
         obj.insert("uuid", m_generatingMsgUUID);

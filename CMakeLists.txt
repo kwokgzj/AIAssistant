@@ -47,6 +47,7 @@ aux_source_directory(./chat DIR_SRCS)
 aux_source_directory(./utils DIR_SRCS)
 aux_source_directory(./protobuf DIR_SRCS)
 aux_source_directory(./lang DIR_SRCS)
+aux_source_directory(./pipe DIR_SRCS)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")# .exe and .dll
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")# .so and .dylib

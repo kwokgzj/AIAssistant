@@ -10,7 +10,6 @@
 #include "lang/LanguageMgr.h"
 #include "utils/RevoScanConfig.h"
 // #include "../ui/lang/language.h"
-#include "utils/AIAssistant.pipeMsg.pb.h"
 
 // #include "lang/LanguageMgr.h"
 // #include "utils/RevoScanConfig.h"
