@@ -22,8 +22,10 @@ public:
 	QString getLastErrorMessage();
     void stopWaitingReply();
     void pageInfoChanged(QJsonObject obj);
+    void setRobotInformation(QString robot, QString robotSecretKey);
 private:
     std::vector<QString> splitJson(const QString& s);
+    void signatureCheck(QString firstText, QString currentPage);
 signals:
     void sigPostReply(QString reply, bool done);
     void sigPostReplyFailed();
@@ -33,6 +35,9 @@ public slots:
 private:
 	ChatbaseHttpRequest *m_httpRequest = nullptr;
     QString m_conversationId;
+    QString m_robotSecretKey;
+    QString m_timestamp;
+    QString m_lastReplyMsg;
     QJsonObject m_userContext;  // userContext 用户上下文
     QJsonArray m_chatContext;   // chatContext 会话上下文
 };

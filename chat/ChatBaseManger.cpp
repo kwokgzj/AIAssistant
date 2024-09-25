@@ -74,11 +74,11 @@ bool ChatbaseManager::sendMessage1(QJsonObject obj){
     json.insert("conversationId", m_conversationId);
     // 消息
     QJsonArray messagesArray;
-    QString message;
     // 创建消息对象
     QJsonObject userMessage;
     QJsonObject msgContent;
-    msgContent.insert("text", obj.value("context"));
+    QString message = obj.value("context").toString();
+    msgContent.insert("text", message);
     userMessage.insert("msgType", "textElem");
     userMessage.insert("msgContent", msgContent);
     messagesArray.append(userMessage);
@@ -96,7 +96,7 @@ bool ChatbaseManager::sendMessage1(QJsonObject obj){
     obj1.insert("content", message);
     obj1.insert("role", "user");
     m_chatContext.append(obj1);
-
+    signatureCheck(message, m_userContext.value("currentPage").toString());
     return post(QUrl("http://test-admin.chishine3d.com/assistant-api/v1/chat"), dataArray);
     // return post(QUrl("http://192.168.10.153:10280/assistant-api/v1/chat"), dataArray);
 }
@@ -172,6 +172,14 @@ void ChatbaseManager::slotPostReplyStream(const QByteArray &reply, bool done){
         msg.push_back(text);
     }
     msg.replace("\\n", "\n");
+    m_lastReplyMsg += msg;
+    if(done){
+        QJsonObject obj1;
+        obj1.insert("content", m_lastReplyMsg);
+        obj1.insert("role", "assistant");
+        m_chatContext.append(obj1);
+        m_lastReplyMsg = "";
+    }
     emit sigPostReply(msg, done);
 }
 
@@ -202,4 +210,17 @@ std::vector<QString> ChatbaseManager::splitJson(const QString& s) {
         result.push_back(currentJson);
     }
     return result;
+}
+
+void ChatbaseManager::setRobotInformation(QString robot, QString robotSecretKey){
+    m_httpRequest->setChatbot(robot);
+    m_robotSecretKey = robotSecretKey;
+}
+
+void ChatbaseManager::signatureCheck(QString firstText, QString currentPage){
+    m_timestamp = QString::number(static_cast<quint64>(time(NULL)));
+    QString str = m_conversationId + firstText + currentPage + m_timestamp + m_robotSecretKey;
+    QByteArray hash = QCryptographicHash::hash(str.toUtf8(), QCryptographicHash::Md5);
+    QString md5String = QString(hash.toHex()).toUpper();
+    m_httpRequest->setSigningMessages(md5String, m_timestamp);
 }

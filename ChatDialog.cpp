@@ -174,13 +174,14 @@ void ChatDialog::init(){
     mainLayout->addSpacing(16);
 
     m_chatmanager = new ChatbaseManager();
+    m_chatmanager->setRobotInformation("revoscan5", "S9A*2J9rgJpi2U^TFN_TXIe$k2ImBZ#B");
     connect(m_chatmanager, &ChatbaseManager::sigPostReply, this, &ChatDialog::slotReplyMessage);
     connect(m_chatmanager, &ChatbaseManager::sigPostReplyFailed, this, &ChatDialog::slotReplyFailed);
     connect(Core::getInstance(), &Core::toQtJsonObject, this, &ChatDialog::slotWebToQtJsonObject);
     connect(Core::getInstance(), &Core::clearContext, this, &ChatDialog::slotClearContext);
 
     m_borderContainer = new BorderContainer(this, 386, 356);
-    m_pipeManager = new PipeManager("revoscan");
+    // m_pipeManager = new PipeManager("revoscan");
 }
 
 void ChatDialog::slotSendBtnClicked()

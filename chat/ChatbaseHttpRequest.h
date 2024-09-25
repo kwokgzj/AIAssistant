@@ -22,6 +22,8 @@ public:
 public:
     bool post(const QUrl &url, const QByteArray &query);
     void stopWaitingReply();
+	void setChatbot(QString chatbot);
+	void setSigningMessages(QString signature, QString timestamp);
 
 signals:
     void sigPostReplyQJsonObject(const QJsonObject &);
@@ -44,6 +46,9 @@ private:
 	bool m_isReplying = false;
 	QTimer* m_timeout{ nullptr };
 	QByteArray m_lastReply;
+	QString m_chatbot;
+	QString m_signature;
+	QString m_timestamp;
 };
 
 #endif // __CHATBASE_HTTP_REQUEST_H__

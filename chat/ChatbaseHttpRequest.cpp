@@ -34,11 +34,10 @@ bool ChatbaseHttpRequest::post(const QUrl &url, const QByteArray &query)
 
     QNetworkRequest request;
 	request.setUrl(url);
-    
 	request.setRawHeader("Content-Type", "application/json");
-	request.setRawHeader("X-chatbot", "revoscan5");
-	request.setRawHeader("X-signature", "");
-	request.setRawHeader("X-timestamp", time_t(NULL));
+	request.setRawHeader("X-chatbot", m_chatbot.toUtf8());
+	request.setRawHeader("X-signature", m_signature.toUtf8());
+	request.setRawHeader("X-timestamp", m_timestamp.toUtf8());
     // request.setRawHeader(QByteArray("Accept"), QByteArray("ACCEPTHEADER"));
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
     request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork); // Events shouldn't be cached
@@ -149,4 +148,13 @@ void ChatbaseHttpRequest::stopWaitingReply(){
     m_timeout->stop();
 	m_postReply->deleteLater();
 	m_postReply = nullptr;
+}
+
+void ChatbaseHttpRequest::setChatbot(QString chatbot){
+    m_chatbot = chatbot;
+}
+
+void ChatbaseHttpRequest::setSigningMessages(QString signature, QString timestamp){
+    m_signature = signature;
+    m_timestamp = timestamp;
 }
